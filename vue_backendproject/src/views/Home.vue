@@ -7,7 +7,9 @@
         <h1 class="text-2xl font-bold">สัญญาการกู้ยืมเงิน</h1>
         <!-- <p class="mt-2 text-gray-600">Description or any other content goes here.</p> -->
       </div>
-          <button @click="goToForm" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-auto">Add Data</button>
+      <router-link to="/Form" class="text-blue-500 px-4 py-2 ml-auto">
+        <button @click="goToForm" class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
+      </router-link>
     </div>
 
     <!-- Data Grid Section -->

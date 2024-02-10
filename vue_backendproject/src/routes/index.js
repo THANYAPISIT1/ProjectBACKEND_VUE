@@ -12,10 +12,10 @@ const Home = () => import('../views/Home.vue')
 
 const routes = [
     { path: '/', component: Home},
-    { path: '/Form', component: () => Contract('../views/Form.vue')},
+    { path: '/Form', component: () => import('../views/Form.vue')},
     { path: '/About', component: () => import('../views/About.vue')},
-    { path: '/Addcon', component: () => AddCon('../views/AddCon.vue')},
-    { path: '/Contract', component: () => Contract('../views/Contract.vue')}
+    { path: '/Addcon', component: () => import('../views/AddCon.vue')},
+    { path: '/Contract', component: () => import('../views/Contract.vue')}
 ];
 
 const router = createRouter({
