@@ -1,21 +1,29 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Form from '../views/Form.vue'
-// import Home from '../views/Home.vue'
-// import Contract from '../views/Contract.vue'
-// import AddCon from '../views/AddCon.vue'
-// import About from '../views/About.vue'
+import { createRouter, createWebHistory } from 'vue-router';
 
-const Home = () => import('../views/Home.vue')
+// import DefaultLayout from '@/layouts/DefaultLayout.vue';
+
+// import Home from '../views/Home.vue'
+// import CusForm from '../views/CusForm.vue'
+// import Customer from '../views/Customer.vue'
+// import ConDetail from '../views/ConDetail.vue'
+// import CusDetail_edit from '../views/CusDetail_edit.vue'
+// import CusDetail from '../views/CusDetail.vue'
+// import Finance from '../views/Finance.vue'
+
+const Home = () => import('../views/Home.vue');
 // const Contract = () => import('../views/Contract.vue')
 // const AddCon = () => import('../views/AddCon.vue')
 // const About = () => import('../views/About.vue')
 
 const routes = [
     { path: '/', component: Home},
-    { path: '/Form', component: () => import('../views/Form.vue')},
-    { path: '/About', component: () => import('../views/About.vue')},
-    { path: '/Addcon', component: () => import('../views/AddCon.vue')},
-    { path: '/Contract', component: () => import('../views/Contract.vue')}
+    { path: '/CusForm', component: () => import('../views/CusForm.vue')},
+    { path: '/Customer', component: () => import('../views/Customer.vue')},
+    { path: '/ConDetail/:ConID', component: () => import('../views/ConDetail.vue')},
+    { path: '/ConForm', component: () => import('../views/ConForm.vue')},
+    { path: '/CusDetail_edit', component: () => import('../views/CusDetail_edit.vue')},
+    { path: '/CusDetail', component: () => import('../views/CusDetail.vue')},
+    { path: '/Finance', component: () => import('../views/Finance.vue')},
 ];
 
 const router = createRouter({

@@ -7,8 +7,8 @@
         <h1 class="text-2xl font-bold">สัญญาการกู้ยืมเงิน</h1>
         <!-- <p class="mt-2 text-gray-600">Description or any other content goes here.</p> -->
       </div>
-      <router-link to="/Form" class="text-blue-500 px-4 py-2 ml-auto">
-        <button @click="goToForm" class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
+      <router-link to="/ConForm" class="text-blue-500 px-4 py-2 ml-auto">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
       </router-link>
     </div>
 
@@ -18,22 +18,26 @@
         <thead>
           <tr>
             <th class="py-2 px-4 border-b">ContactID</th>
-            <th class="py-2 px-4 border-b">Name</th>
             <th class="py-2 px-4 border-b">Status</th>
             <th class="py-2 px-4 border-b">ReturnDate</th>
-            <th class="py-2 px-4 border-b">Description</th>
+            <th class="py-2 px-4 border-b">Principle</th>
           </tr>
         </thead>
         <tbody>
           <!-- Your data rows go here -->
           <!-- For example: -->
-          <tr>
-            <td class="py-2 px-4 border-b">1</td>
-            <td class="py-2 px-4 border-b">John Doe</td>
-            <td class="py-2 px-4 border-b">Active</td>
-            <td class="py-2 px-4 border-b">2022-02-15</td>
-            <td class="py-2 px-4 border-b">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-          </tr>
+          <tr v-for="contract in contracts" :key="contract.ConID">
+            <th class="py-2 px-4 border-b">{{ contract.ConID }}</th>
+            <th class="py-2 px-4 border-b">{{ contract.Status }}</th>
+            <th class="py-2 px-4 border-b">{{ contract.ReturnDate }}</th>
+            <th class="py-2 px-4 border-b">{{ contract.Priciple }}</th>
+            <th class="py-2 px-4 border-b">
+            <router-link :to="'/ConDetail/' + contract.ConID">Detail</router-link>
+          </th>
+          <td>
+            <router-link :to="'/contract/' + contract.ConID">Update</router-link>
+          </td>
+        </tr>
           <!-- ... Repeat for other data rows -->
         </tbody>
       </table>
@@ -42,9 +46,18 @@
 </template>
 
 <script setup>
-const goToForm = () => {
-  const router = useRouter();
-  router.push('/Form'); // Replace '/form' with the route where your Form.vue is located
-};
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+const contracts = ref([]);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8800/contract');
+    contracts.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+});
 </script>
 

@@ -1,0 +1,110 @@
+
+<template>
+  <div>
+    <!-- Back Button -->
+    <router-link to="/" class="text-blue-500 px-4 py-2">Back</router-link>
+
+    <!-- Form Section -->
+    <div class="p-4">
+      <h1 class="text-2xl font-bold mb-4">Contract Form Page</h1>
+
+      <!-- Form Grid -->
+      <div class="grid grid-cols-2 gap-4">
+        <!-- loandate Field -->
+        <div>
+          <label for="loandate" class="block text-sm font-medium text-gray-700">วันที่กู้ยืม</label>
+          <input id="loandate" type="date" v-model="contract.LoanDate" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+
+        <!-- duration Field -->
+        <div>
+          <label for="duration" class="block text-sm font-medium text-gray-700">ระยะเวลา</label>
+          <input id="duration" type="date" v-model="contract.ReturnDate" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+
+        <!-- returndate Field -->
+        <div>
+          <label for="returndate" class="block text-sm font-medium text-gray-700">วันที่ต้องคืน</label>
+          <input id="returndate" type="number" v-model="contract.Duration" class="mt-1 p-2 border rounded-md w-full">
+        </div>
+
+        <!-- principle Field -->
+        <div>
+          <label for="principle" class="block text-sm font-medium text-gray-700">เงินต้น</label>
+          <input id="principle" type="tel" v-model="contract.Status" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+
+        <!-- interest Field -->
+        <div>
+          <label for="interest" class="block text-sm font-medium text-gray-700">ดอกเบี้ย</label>
+          <input id="interest" type="text" v-model="contract.Priciple" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+
+        <!-- penalty Field -->
+        <div>
+          <label for="penalty" class="block text-sm font-medium text-gray-700">ค่าปรับ</label>
+          <input id="penalty" type="number" v-model="contract.Interest" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+
+        <!-- status Field -->
+        <div>
+          <label for="status" class="block text-sm font-medium text-gray-700">สถานะ</label>
+          <input id="status" type="text" v-model="contract.Penality" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+        
+        <div>
+            <label for="return" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
+            <input id="return" type="text" v-model="contract.ReturnMoney" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+        <div>
+            <label for="CusID" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
+            <input id="CusID" type="text" v-model="contract.CusID" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+        <div>
+            <label for="AID" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
+            <input id="AID" type="text" v-model="contract.AID" class="mt-1 p-2 border rounded-md w-full" >
+        </div>
+          <button @click="handleClick" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Submit</button>
+        
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+// import { ref } from 'vue';
+// import axios from 'axios';
+// import { useRouter } from 'vue-router';
+
+// const contract = ref({
+//   LoanDate: "",
+//   ReturnDate: "",
+//   Duration: null,
+//   Status: "",
+//   Priciple: null,
+//   Interest: null,
+//   Penality: "",
+//   ReturnMoney: null,
+//   CusID: null,
+//   AID: null,
+// });
+
+// const router = useRouter();
+
+// const handleChange = (e) => {
+//   contract.value = { ...contract.value, [e.target.name]: e.target.value };
+// };
+
+// const handleClick = async () => {
+//   try {
+//     await axios.post("http://localhost:8800/contract", contract.value);
+//     router.push("/");
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+</script>
+
+<style>
+
+</style>
