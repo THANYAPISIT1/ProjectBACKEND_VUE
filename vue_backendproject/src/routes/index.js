@@ -20,9 +20,10 @@ const routes = [
     { path: '/CusForm', component: () => import('../views/CusForm.vue')},
     { path: '/Customer', component: () => import('../views/Customer.vue')},
     { path: '/ConDetail/:ConID', component: () => import('../views/ConDetail.vue')},
+    { path: '/ConDetail_edit/:ConID', component: () => import('../views/ConDetail_edit.vue')},
     { path: '/ConForm', component: () => import('../views/ConForm.vue')},
-    { path: '/CusDetail_edit', component: () => import('../views/CusDetail_edit.vue')},
     { path: '/CusDetail', component: () => import('../views/CusDetail.vue')},
+    { path: '/CusDetail_edit', component: () => import('../views/CusDetail_edit.vue')},
     { path: '/Finance', component: () => import('../views/Finance.vue')},
 ];
 

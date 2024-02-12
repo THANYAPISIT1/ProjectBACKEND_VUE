@@ -108,3 +108,33 @@
 <style>
 
 </style>
+
+
+const insert_user = async () => {
+  await axios.post(``)
+}
+
+
+
+
+//
+//const insert_contract = async () => {
+//  try {
+//    await axios.post('http://localhost:8800/contract', {
+//      "LoanDate": add.value.LoanDate,
+//      "ReturnDate": add.value.ReturnDate,
+//      "Duration": add.value.Duration,
+//      "Status": add.value.Status,
+//      "Priciple": add.value.Priciple,
+//      "Interest": add.value.Interest,
+//      "Penality": add.value.Penality,
+//      "ReturnMoney": add.value.ReturnMoney,
+//      "CusID": add.value.CusID,
+//      "AID": add.value.AID,
+//    });
+//    console.log(response);
+//  } catch (error) {
+//    console.error(error);
+//  }
+//};
+//

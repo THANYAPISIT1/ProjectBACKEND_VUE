@@ -4,7 +4,7 @@
     <div class="bg-gray-200 p-4 flex items-center">
       <img src="https://cdn-icons-png.flaticon.com/128/1177/1177568.png" alt="Person" class="w-12 h-12 object-cover rounded-full mr-4">
       <div>
-        <h1 class="text-2xl font-bold">สัญญาการกู้ยืมเงิน</h1>
+        <h1 class="text-2xl font-bold font-serif">สัญญาการกู้ยืมเงิน</h1>
         <!-- <p class="mt-2 text-gray-600">Description or any other content goes here.</p> -->
       </div>
       <router-link to="/ConForm" class="text-blue-500 px-4 py-2 ml-auto">
@@ -29,13 +29,13 @@
           <tr v-for="contract in contracts" :key="contract.ConID">
             <th class="py-2 px-4 border-b">{{ contract.ConID }}</th>
             <th class="py-2 px-4 border-b">{{ contract.Status }}</th>
-            <th class="py-2 px-4 border-b">{{ contract.ReturnDate }}</th>
+            <th class="py-2 px-4 border-b">{{ contract.FormattedReturnDate }}</th>
             <th class="py-2 px-4 border-b">{{ contract.Priciple }}</th>
             <th class="py-2 px-4 border-b">
             <router-link :to="'/ConDetail/' + contract.ConID">Detail</router-link>
           </th>
           <td>
-            <router-link :to="'/contract/' + contract.ConID">Update</router-link>
+            <router-link :to="'/ConDetail_edit/' + contract.ConID">Edit</router-link>
           </td>
         </tr>
           <!-- ... Repeat for other data rows -->
@@ -51,10 +51,13 @@ import axios from 'axios';
 
 const contracts = ref([]);
 
+
+
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8800/contract');
     contracts.value = response.data;
+    console.log(response)
   } catch (error) {
     console.error(error);
   }

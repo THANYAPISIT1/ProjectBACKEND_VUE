@@ -66,23 +66,12 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
-const contract = ref({
-  // ConID:'',
-  // LoanDate:'',
-  // Duration:'',
-  // ReturnDate:'',
-  // Priciple:'',
-  // Interest:'',
-  // Penality:'',
-  // Status:'',
-  // ReturnMoney:'',
-});
-
+const contracts = ref([]);
 
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8800/contract/:ConID');
-    contract.value = response.data;
+    contracts.value = response.data;
   } catch (error) {
     console.error(error);
   }

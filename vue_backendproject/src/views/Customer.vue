@@ -26,8 +26,8 @@
             <td class="py-2 px-4 border-b">{{customers.CusName}}</td>
             <td class="py-2 px-4 border-b">{{customers.CusPhoneNo}}</td>
             <td>
-                <router-link to="/CusDetail" class="text-blue-500 px-4 py-2 ml-auto=">
-                    <button @click="goToForm" class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
+                <router-link :to="'/customers/' + customers.CusID" class="text-blue-500 px-4 py-2 ml-auto=">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
                 </router-link>
             </td>
           </tr>
