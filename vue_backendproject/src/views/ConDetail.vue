@@ -71,7 +71,8 @@ const contract = ref({});
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`http://localhost:8800/contract/${1}`);
+    const ConID = this.route.params.ConID;
+    const response = await axios.get(`http://localhost:8800/contract/${ConID}`);
     contract.value = response.data;
     console.log(response)
   } catch (error) {
