@@ -8,15 +8,15 @@
         <div v-for="customers in customers" :key="customers.CusID" class="col-span-1">
           <div class="bg-secondary inline-block py-4 px-6 md:py-7 md:px-8 mb-4 md:mb-7 rounded-lg shadow-md">
             <h3 class="text-teal-400 text-3xl mb-1">{{ customers.CusName }}</h3>
-            <span class="text-primary text-xl">{{ customers.CusID }}</span>
+            <span class="text-primary text-xl grid grid-cols-2"><p>CustomerID : </p>{{ customers.CusID }}</span>
           </div>
           <ul class="list-none md:list-disc mb-7">
             <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">SSN:</span> {{ customers.SSN }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">IG:</span> {{ customers.CusPhoneNo }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">Line:</span> {{ customers.Income }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">PhoneNo.:</span> {{ customers.Facebook }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">สถานศึกษา:</span>{{ customers.Asset }}</li>
-            <li class="text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">Phone:</span>{{ customers.Address }}</li>
+            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">PhoneNo. :</span> {{ customers.CusPhoneNo }}</li>
+            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">Income :</span> {{ customers.Income }}</li>
+            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">Facebook :</span> {{ customers.Facebook }}</li>
+            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">สินทรัพย์ :</span>{{ customers.Asset }}</li>
+            <li class="text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">ที่อยู่:</span>{{ customers.Address }}</li>
           </ul>
           <ul class="flex list-none mb-0 space-x-4">
             <li><a href="#!" class="text-xl"><i class="ti-twitter-alt"></i></a></li>
@@ -39,7 +39,7 @@ const customers = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8800/customers');
+    const response = await axios.get(`http://localhost:8800/customers/${1}`);
     customers.value = response.data;
   } catch (error) {
     console.error(error);

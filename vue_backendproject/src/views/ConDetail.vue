@@ -9,7 +9,7 @@
   
         <!-- Form Grid -->
         <div>
-    <div v-for="contract in contracts" :key="contract.ConID" class="grid grid-cols-2 gap-4">
+    <div v-for="contract in contract" :key="contract.ConID" class="grid grid-cols-2 gap-4">
       <!-- loandate Field -->
       <div>
         <label for="loandate" class="block text-sm font-medium text-gray-700">วันที่กู้ยืม : </label>
@@ -66,23 +66,14 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
-const contract = ref({
-  // ConID:'',
-  // LoanDate:'',
-  // Duration:'',
-  // ReturnDate:'',
-  // Priciple:'',
-  // Interest:'',
-  // Penality:'',
-  // Status:'',
-  // ReturnMoney:'',
-});
+const contract = ref({});
 
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8800/contract/:ConID');
+    const response = await axios.get(`http://localhost:8800/contract/${1}`);
     contract.value = response.data;
+    console.log(response)
   } catch (error) {
     console.error(error);
   }

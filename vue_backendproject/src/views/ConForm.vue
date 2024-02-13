@@ -103,9 +103,9 @@ const submitForm = async() =>{
       "AID": add.value.AID,
     });
 
-    console.log(response);
     alert("Add contract success");
     window.location.reload();
+    console.log(response);
   } catch (error) {
     console.error('Error adding contract:', error);
     alert("Failed to add contract");

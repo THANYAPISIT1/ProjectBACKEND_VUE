@@ -25,7 +25,7 @@ app.get("/contract", (req,res)=>{
 
 //Show contract in specific Contract page//
 app.get("/contract/:ConID", (req,res)=>{
-    const ConID = params.ConID;
+    const ConID = req.params.ConID;
     const q = "SELECT * FROM contract WHERE ConID = ? ";
     
     db.query(q,[ConID],(err,data)=>{
