@@ -31,7 +31,7 @@
           <tr v-for="contract in contracts" :key="contract.ConID">
             <th class="py-2 px-4 border-b">{{ contract.ConID }}</th>
             <th class="py-2 px-4 border-b">{{ contract.Status }}</th>
-            <th class="py-2 px-4 border-b">{{ contract.FormattedReturnDate }}</th>
+            <th class="py-2 px-4 border-b">{{ contract.ReturnDate }}</th>
             <th class="py-2 px-4 border-b">{{ contract.Priciple }}</th>
             <th class="py-2 border-b">
               <router-link :to="'/ConDetail/' + contract.ConID"><button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 mr-1">Details</button></router-link>
