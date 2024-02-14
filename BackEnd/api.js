@@ -171,7 +171,7 @@ app.get("/financial/:ConID", (req, res) => {
 
 
 
-//Create list fibancial in financial page
+//Create list financial in financial page
 app.post("/financial/:ConID" , (req,res)=>{
     const ConID = req.params.ConID;
     const q = "INSERT INTO financial (`FDate`,`Detail`,`Amount`,`Total`,`ConID`) VALUES(?) ";
@@ -186,7 +186,7 @@ app.post("/financial/:ConID" , (req,res)=>{
 
     db.query(q , [values] , (err,data)=>{
         if(err) return res.json(err)
-        return res.json("finance is created successfully!");
+        return res.json("financial is created successfully!");
     })
 })
 

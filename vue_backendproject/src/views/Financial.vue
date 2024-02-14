@@ -3,11 +3,11 @@
     <div class="bg-gray-200 p-4 flex items-center">
       <img src="https://cdn-icons-png.flaticon.com/128/1177/1177568.png" alt="Person" class="w-12 h-12 object-cover rounded-full mr-4">
       <div>
-        <h1 class="text-2xl font-bold">สัญญาการกู้ยืมเงิน</h1>
-        <p class="mt-2 text-gray-600">รหัสสัญญา : 002</p>
+        <h1 class="text-2xl font-bold">รายการการเงิน</h1>
+        <p class="mt-2 text-gray-600">รหัสสัญญา : {{  }}</p>
       </div>
       <router-link to="/CusForm" class="text-blue-500 px-4 py-2 ml-auto">
-        <button @click="goToForm" class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
       </router-link>
     </div>
 <!-- Content -->
@@ -23,14 +23,11 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Your data rows go here -->
-          <!-- For example: -->
-          <tr>
-            <td class="py-2 px-4 border-b text-center">1</td>
-            <td class="py-2 px-4 border-b text-center">11/2</td>
-            <td class="py-2 px-4 border-b text-center">กู้เงิน</td>
-            <td class="py-2 px-4 border-b text-center">5000</td>
-            <td class="py-2 px-4 border-b text-center">-5000</td>
+          <!-- Finance data -->
+          <tr v-for="financial in financial" :key="financial.FID">
+            <td class="py-2 px-4 border-b text-center">{{ financial.FID }}</td>
+            <td class="py-2 px-4 border-b text-center">{{ financial.FDate }}</td>
+            <td class="py-2 px-4 border-b text-center">{{ financial.Detail }}</td>
           </tr>
           <!-- ... Repeat for other data rows -->
         </tbody>
@@ -39,6 +36,22 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+const financial = ref([]);
+
+
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:8800/financial`);
+    financial.value = response.data;
+    console.log(response)
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 </script>
 

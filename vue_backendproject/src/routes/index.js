@@ -25,7 +25,7 @@ const routes = [
     { path: '/ConForm', component: () => import('../views/ConForm.vue')},
     { path: '/CusDetail/:CusID', component: () => import('../views/CusDetail.vue')},
     { path: '/CusDetail_edit/:CusID', component: () => import('../views/CusDetail_edit.vue')},
-    { path: '/Finance', component: () => import('../views/Finance.vue')},
+    { path: '/Financial', component: () => import('../views/Financial.vue')},
 ];
 
 const router = createRouter({

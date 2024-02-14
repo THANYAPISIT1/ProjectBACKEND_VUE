@@ -5,7 +5,7 @@
   
       <!-- Form Section -->
   <div class="p-4">
-    <div class="my-4">
+    <div class="my-4" v-for="contract in contract" :key="contract.ConID">
       <h1 class="text-2xl font-bold mb-4"> Contract Detail </h1>
       <p class="mt-2 text-gray-600">ContractID : {{ contract.ConID }}</p>
     </div>
@@ -54,10 +54,16 @@
           <label for="status" class="block text-sm font-medium text-gray-700">สถานะ : </label>
           <h2 class="py-2 px-4 border-b">{{ contract.Status }}</h2>
         </div>
-
+        <!-- ReturnMoney Field -->
         <div>
           <label for="return" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
           <h2 class="py-2 px-4 border-b">{{ contract.ReturnMoney }}</h2>
+        </div>
+        <!-- Goto Finance -->
+        <div>
+          <router-link to="/financial">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Finacne</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -70,9 +76,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router'
 
-
 const contract = ref({});
-
 const route = useRoute();
 
 onMounted(async () => {
@@ -85,6 +89,8 @@ onMounted(async () => {
     console.error(error);
   }
 });
+
+
   </script>
   
   <style>

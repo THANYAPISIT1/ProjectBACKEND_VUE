@@ -34,17 +34,23 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { useRoute } from 'vue-router'
 
 const customers = ref([]);
+const route = useRoute();
+
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`http://localhost:8800/customers/${1}`);
+    const CusID = route.params.CusID;
+    const response = await axios.get(`http://localhost:8800/customers/${CusID}`);
     customers.value = response.data;
   } catch (error) {
     console.error(error);
   }
 });
+
+
 </script>
 
 <style>
