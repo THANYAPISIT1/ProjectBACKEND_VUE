@@ -5,14 +5,14 @@
 
     <!-- Form Section -->
     <div class="p-4">
-      <div class="my-4" v-for="contract in contracts" :key="contract.ConID">
+      <div class="my-4" v-for="contract in contract" :key="contract.ConID">
         <h1 class="text-2xl font-bold mb-4"> Contract Detail </h1>
         <p class="mt-2 text-gray-600">ContractID : {{ contract.ConID }}</p>
       </div>
 
       <!-- Form Grid -->
       <div>
-        <div v-for="contract in contracts" :key="contract.ConID" class="grid grid-cols-2 gap-4">
+        <div v-for="contract in contract" :key="contract.ConID" class="grid grid-cols-2 gap-4">
           <!-- loandate Field -->
           <div>
             <label for="loandate" class="block text-sm font-medium text-gray-700">วันที่กู้ยืม : </label>
@@ -76,43 +76,38 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 
-const contracts = ref({});
-const router = useRouter();
+const contract = ref({});
 const route = useRoute();
 
 onMounted(async () => {
   try {
     const ConID = route.params.ConID;
     const response = await axios.get(`http://localhost:8800/contract/${ConID}`);
-    contracts.value = response.data;
+    contract.value = response.data;
     console.log(response);
   } catch (error) {
     console.error(error);
   }
 });
 
-const updateData = async () => {
-  try {
-    // Assuming you have fieldsToUpdate array with the names of fields to update
-    const fieldsToUpdate = ['LoanDate', 'Duration', 'ReturnDate', 'Status'];
-    
-    const ConID = route.params.ConID;
-    
-    // Create an object with only the fields you want to update
-    const updatedData = fieldsToUpdate.reduce((acc, field) => {
-      acc[field] = contracts.value[field];
-      return acc;
-    }, {});
+const editcontract = async () => {
+    await axios.put(`http://localhost:8800/contract/${ConID}`, {
+      "LoanDate" :  contract.value.LoanDate,
+      "ReturnDate" : contract.value.ReturnDate,
+      "Duration" : contract.value.Duration,
+      "Priciple" : contract.value.Principle,
+      "Interest" : contract.value.Interest,
+      "Penality" : contract.value.Penality,
+      "Status" : contract.value.Status,
+      "ReturnMoney" : contract.value.ReturnMoney
 
-    await axios.put(`http://localhost:8800/contract/${ConID}`, updatedData);
-    
-    router.push('/ConDetail_edit');
-  } catch (error) {
-    console.error(error);
-  }
-};
+    }).then((response) =>{
+      console.log(response)
+    }).catch((err) => {
+      console.log(err)
+    });
 </script>
 
 <style>

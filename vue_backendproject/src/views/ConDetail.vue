@@ -10,7 +10,7 @@
       <p class="mt-2 text-gray-600">ContractID : {{ contract.ConID }}</p>
     </div>
   
-        <!-- Form Grid -->
+    <!-- Form Grid -->
     <div>
       <div v-for="contract in contract" :key="contract.ConID" class="grid grid-cols-2 gap-4">
         <!-- loandate Field -->
@@ -61,11 +61,32 @@
         </div>
         <!-- Goto Finance -->
         <div>
-          <router-link to="/financial">
+          <router-link :to="'/finance/' + contract.ConID">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Finacne</button>
           </router-link>
         </div>
       </div>
+    </div>
+    <!--  -->
+    <div class="mt-4 p-4">
+      <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-md overflow-hidden">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b">วันที่</th>
+            <th class="py-2 px-4 border-b">รายละเอียด</th>
+            <th class="py-2 px-4 border-b">จำนวน</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Finance data -->
+          <tr v-for="finance in finance" :key="finance.FID">
+            <td class="py-2 px-4 border-b text-center">{{ finance.FDate }}</td>
+            <td class="py-2 px-4 border-b text-center">{{ finance.Detail }}</td>
+            <td class="py-2 px-4 border-b text-center">{{ finance.Amount }}</td>
+          </tr>
+          <!-- ... Repeat for other data rows -->
+        </tbody>
+      </table>
     </div>
   </div>
     </div>
@@ -76,6 +97,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router'
 
+const finance = ref({});
 const contract = ref({});
 const route = useRoute();
 
@@ -88,7 +110,23 @@ onMounted(async () => {
   } catch (error) {
     console.error(error);
   }
+
+
+  try {
+    const ConID = route.params.ConID;
+    const response = await axios.get(`http://localhost:8800/finance/${ConID}`);
+    finance.value = response.data;
+    console.log(response)
+  } catch (error) {
+    console.error(error);
+  }
 });
+
+
+
+
+
+// 
 
 
   </script>

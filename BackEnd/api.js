@@ -157,10 +157,10 @@ app.put("/customers/:CusID",(req,res) =>{
 //    })
 //})
 
-//Total Amount in financial page
-app.get("/financial/:ConID", (req, res) => {
+//Total Amount in finance page
+app.get("/finance/:ConID", (req, res) => {
     const ConID = req.params.ConID;
-    const q = "SELECT *, (SELECT SUM(Amount) FROM financial WHERE ConID = ?) AS TotalAmount FROM financial WHERE ConID = ?";
+    const q = "SELECT *, (SELECT SUM(Amount) FROM finance WHERE ConID = ?) AS TotalAmount FROM finance WHERE ConID = ?";
 
     db.query(q, [ConID, ConID], (err, data) => {
         if (err) return res.json(err);
@@ -171,22 +171,21 @@ app.get("/financial/:ConID", (req, res) => {
 
 
 
-//Create list financial in financial page
-app.post("/financial/:ConID" , (req,res)=>{
+//Create list finance in finance page
+app.post("/finance/:ConID" , (req,res)=>{
     const ConID = req.params.ConID;
-    const q = "INSERT INTO financial (`FDate`,`Detail`,`Amount`,`Total`,`ConID`) VALUES(?) ";
+    const q = "INSERT INTO finance (`FDate`,`Detail`,`Amount`,`ConID`) VALUES(?) ";
     const values = [
         req.body.FDate,
         req.body.Detail,
         req.body.Amount,
-        req.body.Total,
         ConID
     ];
 
 
     db.query(q , [values] , (err,data)=>{
         if(err) return res.json(err)
-        return res.json("financial is created successfully!");
+        return res.json("finance is created successfully!");
     })
 })
 

@@ -17,7 +17,7 @@ const Home = () => import('../views/Home.vue');
 // const About = () => import('../views/About.vue')
 
 const routes = [
-    { path: '/', component: Home},
+    { path: '/', component: Home },
     { path: '/CusForm', component: () => import('../views/CusForm.vue')},
     { path: '/Customer', component: () => import('../views/Customer.vue')},
     { path: '/ConDetail/:ConID', component: () => import('../views/ConDetail.vue')},
@@ -25,7 +25,8 @@ const routes = [
     { path: '/ConForm', component: () => import('../views/ConForm.vue')},
     { path: '/CusDetail/:CusID', component: () => import('../views/CusDetail.vue')},
     { path: '/CusDetail_edit/:CusID', component: () => import('../views/CusDetail_edit.vue')},
-    { path: '/Financial', component: () => import('../views/Financial.vue')},
+    { path: '/Finance/:ConID', component: () => import('../views/Finance.vue')},
+    { path: '/FinanceForm/', component: () => import('../views/FinanceForm.vue')},
 ];
 
 const router = createRouter({
