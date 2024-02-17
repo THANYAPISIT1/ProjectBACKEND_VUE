@@ -88,7 +88,7 @@ const contract = ref({
   Status : '',
   Priciple : '',
   Interest : '',
-  Penality : '8520',
+  Penality : '',
   ReturnMoney : '',
 })
 
@@ -111,7 +111,7 @@ const edit = ref({
   Status : '',
   Priciple : '',
   Interest : '',
-  Penality : '85200',
+  Penality : '',
   ReturnMoney : '',
 });
 
