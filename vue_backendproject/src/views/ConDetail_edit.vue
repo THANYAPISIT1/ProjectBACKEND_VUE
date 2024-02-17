@@ -53,7 +53,7 @@
 
           <div>
             <label for="Penality" class="block text-sm font-medium text-gray-700">ค่าปรับ : </label>
-            <input v-model="edit.Penality" id="Penality" class="mt-1 p-2 border rounded-md w-full" />
+            <input placeholder="" v-model="edit.Penality" id="Penality" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
           <div>
@@ -87,9 +87,17 @@ import axios from 'axios';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const contract = ref({})
+const contract = ref({
+  LoanDate : '',
+  ReturnDate : '',
+  Duration : '',
+  Status : '',
+  Priciple : '',
+  Interest : '',
+  Penality : '8520',
+  ReturnMoney : '',
+})
 
-const edit = ref({});
 
 onMounted(async () => {
   try {
@@ -101,6 +109,16 @@ onMounted(async () => {
   } catch (error) {
     console.error(error);
   }
+});
+const edit = ref({
+  LoanDate : '',
+  ReturnDate : '',
+  Duration : '',
+  Status : '',
+  Priciple : '',
+  Interest : '',
+  Penality : '85200',
+  ReturnMoney : '',
 });
 
 const updateCon = async () => {

@@ -35,9 +35,9 @@ app.get("/contract/:ConID", (req,res)=>{
 })
 
 //Craete contract in Contract page//
-app.post("/contract" , (req,res)=>{
-    const q = "INSERT INTO contract (`LoanDate`,`ReturnDate`,`Duration`,`Status`,`Priciple`,`Interest`,`Penality`,`ReturnMoney`,`CusID`,`AID`) VALUES(?)";
-    const values = [
+app.post("/contract", (req, res) => {
+    const contractQuery = "INSERT INTO contract (`LoanDate`, `ReturnDate`, `Duration`, `Status`, `Priciple`, `Interest`, `Penality`, `ReturnMoney`, `CusID`, `AID`) VALUES(?)";
+    const contractValues = [
         req.body.LoanDate,
         req.body.ReturnDate,
         req.body.Duration,
@@ -50,11 +50,24 @@ app.post("/contract" , (req,res)=>{
         req.body.AID
     ];
 
-    db.query(q , [values] , (err,data)=>{
-        if(err) return res.json(err)
-        return res.json("Contract is created successfully!");
-    })
-})
+    db.query(contractQuery, [contractValues], (err, contractData) => {
+        if (err) return res.json(err);
+
+        // Insert into finance table
+        const financeQuery = "INSERT INTO finance (`FDate`, `Detail`, `Amount`, `ConID`) VALUES(?)";
+        const financeValues = [
+            req.body.LoanDate, // Use LoanDate as FDate
+            "Principle", // You can set a default value for Detail or adjust it as needed
+            req.body.Priciple, // Use Priciple as Amount
+            contractData.insertId // Use the insertId from the contractData as ConID
+        ];
+
+        db.query(financeQuery, [financeValues], (financeErr, financeData) => {
+            if (financeErr) return res.json(financeErr);
+            return res.json("Contract and finance data created successfully!");
+        });
+    });
+});
 
 
 //Update contract in Contract page//
@@ -172,9 +185,8 @@ app.put("/customers/edit/:CusID",(req,res) =>{
 //Total Amount in finance page
 app.get("/finance/:ConID", (req, res) => {
     const ConID = req.params.ConID;
-    const q = "SELECT *, (SELECT SUM(Amount) FROM finance WHERE ConID = ?) AS TotalAmount FROM finance WHERE ConID = ?";
-
-    db.query(q, [ConID, ConID], (err, data) => {
+    const q = "SELECT * FROM finance WHERE ConID = ?";
+    db.query(q, [ConID], (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
     });
@@ -193,6 +205,7 @@ app.post("/finance/:ConID" , (req,res)=>{
         req.body.Amount,
         ConID
     ];
+
 
 
     db.query(q , [values] , (err,data)=>{

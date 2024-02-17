@@ -60,12 +60,20 @@
           <h2 class="py-2 px-4 border-b">{{ contract.ReturnMoney }}</h2>
         </div>
         <!-- Goto Finance -->
-        <div>
-          <button @click="showTable" type="showItem" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Show Finance Table</button>
-            <router-link :to="'/AddFinance/' + contract.ConID" class=" my-8">
-              <button type="addform" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add Finance Data</button>
-            </router-link>
-          </div>
+    <!-- Goto Finance and Total Amount Section -->
+        <div class="flex items-center justify-between">
+            <div>
+              <button @click="showTable" type="showItem" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Show Finance Table</button>
+              <router-link :to="'/AddFinance/' + contract.ConID" class="my-8">
+                <button type="addform" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add Finance Data</button>
+              </router-link>
+            </div>
+
+            <!-- Total Amount Box -->
+            <div class="bg-gray-100 p-4 rounded-md">
+              <p class="text-sm font-medium text-gray-700">Total Amount: {{ totalAmount }} </p>
+            </div>
+        </div>
         </div>
       </div>
     <!--  -->
@@ -94,7 +102,7 @@
   </template>
   
   <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted ,computed } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router'
 
@@ -129,8 +137,16 @@ onMounted(async () => {
   }
 });
 
+// Computed property to calculate the total amount
+const totalAmount = computed(() => {
+  const financeArray = finance.value;
 
+  if (!Array.isArray(financeArray)) {
+    return 0; // Return 0 if finance is not an array
+  }
 
+  return financeArray.reduce((total, item) => total + (item.Amount || 0), 0);
+});
 
 
 // 
