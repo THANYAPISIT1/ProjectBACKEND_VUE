@@ -30,6 +30,7 @@ app.get("/contract/:ConID", (req,res)=>{
     
     db.query(q,[ConID],(err,data)=>{
         if(err) return res.json(err)
+        const dataArray = Object.values(data);
         return res.json(data);
     })
 })
@@ -70,29 +71,7 @@ app.post("/contract", (req, res) => {
 });
 
 
-//Update contract in Contract page//
-// app.put("/contract/edit/:ConID",(req,res) =>{
-//     const ConID = req.params.ConID;
-//     console.log(ConID)
-//     const q = "UPDATE contract SET `LoanDate` = ?,`ReturnDate` = ?,`Duration` = ?,`Status` = ?,`Priciple` = ?,`Interest` = ?,`Penality` = ?,`ReturnMoney` = ? ,`CusID` = ?,`AID` = ? WHERE ConID = ?";
-//     const values=[
-//         req.body.LoanDate,
-//         req.body.ReturnDate,
-//         req.body.Duration,
-//         req.body.Status,
-//         req.body.Priciple,
-//         req.body.Interest,
-//         req.body.Penality,
-//         req.body.ReturnMoney,
-//         req.body.CusID,
-//         req.body.AID
-//     ]
 
-//     db.query(q , [...values,ConID] , (err,data)=>{
-//         if(err) return res.json(err)
-//         return res.json("Contract has been updated successfully!");
-//     })
-// })
 app.post("/contract/edit/:ConID",(req,res) =>{
     const ConID = req.params.ConID;
     console.log(ConID)
@@ -148,39 +127,23 @@ app.post("/customers" , (req,res)=>{
     })
 })
 
-//Update customers in Customers page//
-app.put("/customers/edit/:CusID",(req,res) =>{
+
+
+app.post("/customers/edit/:CusID",(req,res) =>{
     const CusID = req.params.CusID;
-    const q = "UPDATE customers SET `CusName` = ?,`SSN` = ?,`Address` = ?,`CusPhoneNo` = ?,`Facebook` = ?,`Income` = ?,`Asset` = ? WHERE CusID = ?";
-
-    const values=[
-        req.body.CusName,
-        req.body.SSN,
-        req.body.Address,
-        req.body.CusPhoneNo,
-        req.body.Facebook,
-        req.body.Income,
-        req.body.Asset
-    ]
-
+    console.log(CusID)
+    const q = "UPDATE customers SET `CusName` = ?,`SSN` = ?,`Address` = ?,`CusPhoneNo` = ?,`Income` = ?,`Facebook` = ?,`Asset` = ? WHERE CusID = ?";
+    const {raw} = req.body
+ 
+    console.log(raw)
+    const values = Object.values(raw)
 
     db.query(q , [...values,CusID] , (err,data)=>{
         if(err) return res.json(err)
-        return res.json("Contract has been updated successfully!");
+        return res.json("customers has been updated successfully!");
     })
 })
 
-//-------------------------------------------------------------------------------//
-//Show list finance in finance by ConID
-//app.get("/financial/:ConID", (req,res)=>{
-//    const ConID = req.params.ConID;
-//    const q = "SELECT * FROM financial WHERE ConID = ? ";
-//    
-//    db.query(q,[ConID],(err,data)=>{
-//        if(err) return res.json(err)
-//        return res.json(data);
-//    })
-//})
 
 //Total Amount in finance page
 app.get("/finance/:ConID", (req, res) => {

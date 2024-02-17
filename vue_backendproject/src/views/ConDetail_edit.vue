@@ -16,13 +16,13 @@
           <!-- loandate Field -->
           <div>
             <label for="loandate" class="block text-sm font-medium text-gray-700">วันที่กู้ยืม : </label>
-            <input v-model="edit.LoanDate" id="loandate" type="date" class="mt-1 p-2 border rounded-md w-full" />
+            <input v-model="edit.LoanDate" id="loandate" class="mt-1 p-2 border rounded-md w-full" readonly />
           </div>
 
           <!-- ReturnDate Field -->
           <div>
             <label for="ReturnDate" class="block text-sm font-medium text-gray-700">วันที่ต้องคืน : </label>
-            <input v-model="edit.ReturnDate" id="ReturnDate" type="date" class="mt-1 p-2 border rounded-md w-full" />
+            <input v-model="edit.ReturnDate" id="ReturnDate" class="mt-1 p-2 border rounded-md w-full" readonly />
           </div>
 
           <!-- Duration Field -->
@@ -66,7 +66,7 @@
           </div>
 
           <div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Update</button>
+            <button @click="showAlert" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Update</button>
           </div>
         </div>
       </form>
@@ -81,24 +81,18 @@ import axios from 'axios';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const contract = ref({
-  LoanDate : '',
-  ReturnDate : '',
-  Duration : '',
-  Status : '',
-  Priciple : '',
-  Interest : '',
-  Penality : '',
-  ReturnMoney : '',
-})
+const contract = ref([])
 
+const showAlert = () => {
+  alert('Data has been update!'); 
+};
 
 onMounted(async () => {
   try {
     const ConID = route.params.ConID;
     const response = await axios.get(`http://localhost:8800/contract/${ConID}`);
     contract.value = response.data;
-    edit.value = { ...response.data };
+    edit.value = { ...response.data[0] };
     console.log(response.data);
   } catch (error) {
     console.error(error);
@@ -121,8 +115,6 @@ const updateCon = async () => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = ({
-      // "ConID": edit.value.ConID,
-      // "AID": edit.value.AID,
       "LoanDate": edit.value.LoanDate,
       "ReturnDate": edit.value.ReturnDate,
       "Duration": edit.value.Duration,

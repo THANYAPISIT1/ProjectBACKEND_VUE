@@ -5,9 +5,10 @@
   
       <!-- Form Section -->
   <div class="p-4">
-    <div class="my-4" v-for="contract in contract" :key="contract.ConID">
-      <h1 class="text-2xl font-bold mb-4"> Contract Detail </h1>
-      <p class="mt-2 text-gray-600">ContractID : {{ contract.ConID }}</p>
+    <div class="my-4 grid grid-cols-4" v-for="contract in contract" :key="contract.ConID">
+      <h1 class="text-2xl font-bold mb-4 col-span-4"> Contract Detail </h1>
+      <h2 class="mt-2 text-gray-600">ContractID : {{ contract.ConID }}</h2>
+      <h2 class="mt-2 text-gray-600">CustomerID : {{ contract.CusID }}</h2>
     </div>
   
     <!-- Form Grid -->
@@ -56,11 +57,11 @@
         </div>
         <!-- ReturnMoney Field -->
         <div>
-          <label for="return" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
+          <label for="return" class="block text-sm font-medium text-gray-700">จำนวนเงินที่ต้องคืน : </label>
           <h2 class="py-2 px-4 border-b">{{ contract.ReturnMoney }}</h2>
         </div>
         <!-- Goto Finance -->
-    <!-- Goto Finance and Total Amount Section -->
+        <!-- Goto Finance and Total Amount Section -->
         <div class="flex items-center justify-between">
             <div>
               <button @click="showTable" type="showItem" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Show Finance Table</button>
@@ -68,14 +69,13 @@
                 <button type="addform" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add Finance Data</button>
               </router-link>
             </div>
-
             <!-- Total Amount Box -->
-            <div class="bg-gray-100 p-4 rounded-md">
-              <p class="text-sm font-medium text-gray-700">Total Amount: {{ totalAmount }} </p>
-            </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-md">
+          <p class="text-sm font-medium text-gray-700">Total Amount: {{ totalAmount }} </p>
         </div>
         </div>
-      </div>
+    </div>
     <!--  -->
     <div v-if="isTableVisible"  class="mt-4 p-4">
       <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-md overflow-hidden">
@@ -147,10 +147,6 @@ const totalAmount = computed(() => {
 
   return financeArray.reduce((total, item) => total + (item.Amount || 0), 0);
 });
-
-
-// 
-
 
   </script>
   

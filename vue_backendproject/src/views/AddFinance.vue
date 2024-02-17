@@ -1,7 +1,7 @@
 <template>
     <div>
       <!-- Back Button -->
-      <router-link :to="'/ConDetail/' + finance.ConID" class="text-blue-500 px-4 py-2">Back</router-link>
+      <router-link :to="'/ConDetail/' + route.params.ConID" class="text-blue-500 px-4 py-2">Back</router-link>
   
       <!-- Form Section -->
       <div class="p-4">
@@ -56,7 +56,6 @@
     Amount: '',
     ConID: '',
   });
-  const finance = ref({});
   
   const submitForm = async() =>{
     try {

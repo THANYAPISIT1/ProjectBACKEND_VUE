@@ -1,5 +1,6 @@
 <template>
 <section class="bg-light mt-6">
+  <router-link to="/customer" class="text-blue-500 px-4 py-2">Back</router-link>
     <div class="container mx-auto p-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="col-span-1 md:mb-0 md:mr-4">
@@ -10,20 +11,30 @@
             <h3 class="text-teal-400 text-3xl mb-1">{{ customers.CusName }}</h3>
             <span class="text-primary text-xl grid grid-cols-2"><p>CustomerID : </p>{{ customers.CusID }}</span>
           </div>
-          <ul class="list-none md:list-disc mb-7">
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">SSN:</span> {{ customers.SSN }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">PhoneNo. :</span> {{ customers.CusPhoneNo }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">Income :</span> {{ customers.Income }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">Facebook :</span> {{ customers.Facebook }}</li>
-            <li class="mb-3 md:mb-4 text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">สินทรัพย์ :</span>{{ customers.Asset }}</li>
-            <li class="text-lg"><span class="text-secondary text-base md:text-lg font-semibold me-2">ที่อยู่:</span>{{ customers.Address }}</li>
-          </ul>
-          <ul class="flex list-none mb-0 space-x-4">
-            <li><a href="#!" class="text-xl"><i class="ti-twitter-alt"></i></a></li>
-            <li><a href="#!" class="text-xl"><i class="ti-facebook"></i></a></li>
-            <li><a href="#!" class="text-xl"><i class="ti-pinterest"></i></a></li>
-            <li><a href="#!" class="text-xl"><i class="ti-instagram"></i></a></li>
-          </ul>
+            <div>
+              <label for="SSN" class="block text-sm font-medium text-gray-700">SSN : </label>
+              <h2 class="py-2 px-4 border-b w-1/2">{{ customers.SSN }}</h2>
+            </div>
+            <div>
+              <label for="CusPhoneNo" class="block text-sm font-medium text-gray-700">PhoneNo : </label>
+              <h2 class="py-2 px-4 border-b w-1/2">{{ customers.CusPhoneNo }}</h2>
+            </div>
+            <div>
+              <label for="Income" class="block text-sm font-medium text-gray-700">Income : </label>
+              <h2 class="py-2 px-4 border-b w-1/2">{{ customers.Income }}</h2>
+            </div>
+            <div>
+              <label for="Facebook" class="block text-sm font-medium text-gray-700">Facebook : </label>
+              <h2 class="py-2 px-4 border-b w-1/2">{{ customers.Facebook }}</h2>
+            </div>
+            <div>
+              <label for="Asset" class="block text-sm font-medium text-gray-700">Asset : </label>
+              <h2 class="py-2 px-4 border-b w-1/2">{{ customers.Asset }}</h2>
+            </div>
+            <div>
+              <label for="Address" class="block text-sm font-medium text-gray-700">Address : </label>
+              <h2 class="py-2 px-4 border-b w-1/2">{{ customers.Address }}</h2>
+            </div>
         </div>
       </div>
     </div>

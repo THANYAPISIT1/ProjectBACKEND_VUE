@@ -57,7 +57,7 @@
             <input id="Asset" type="text" v-model="add.Asset" class="mt-1 p-2 border rounded-md w-full">
           </div>
 
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Submit</button>
+          <button @click="showAlert" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Submit</button>
         </div>
       </form>
     </div>
@@ -67,6 +67,11 @@
 <script setup>
 import { ref } from 'vue'; 
 import axios from 'axios';
+
+
+const showAlert = () => {
+  alert('Customer has been Created!'); 
+};
 
 const add = ref({
   CusID: '',

@@ -41,7 +41,7 @@
         <!-- Priciple Field -->
         <div>
           <label for="Priciple" class="block text-sm font-medium text-gray-700">เงินต้น</label>
-          <input id="Priciple" type="tel" v-model="add.Priciple" class="mt-1 p-2 border rounded-md w-full">
+          <input placeholder="-" id="Priciple" type="tel" v-model="add.Priciple" class="mt-1 p-2 border rounded-md w-full">
         </div>
 
         <!-- interest Field -->
@@ -57,7 +57,7 @@
         </div>
 
         <div>
-            <label for="return" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
+            <label for="return" class="block text-sm font-medium text-gray-700">จำนวนเงินที่ต้องคืน : </label>
             <input id="return" type="text" v-model="add.ReturnMoney" class="mt-1 p-2 border rounded-md w-full">
         </div>
         <div>
@@ -68,7 +68,7 @@
             <label for="AID" class="block text-sm font-medium text-gray-700">AID : </label>
             <input id="AID" type="text" v-model="add.AID" class="mt-1 p-2 border rounded-md w-full">
         </div>
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Submit</button>
+          <button @click="showAlert" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Submit</button>
       </div>
     </form>
     </div>
@@ -78,6 +78,11 @@
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue';
+
+
+const showAlert = () => {
+  alert('Contract has been Created!'); 
+};
 
 const add = ref({
   LoanDate: '',
@@ -106,8 +111,6 @@ const submitForm = async() =>{
       "CusID": add.value.CusID,
       "AID": add.value.AID,
     });
-
-    alert("Add contract success");
     window.location.reload();
     console.log(response);
   } catch (error) {
