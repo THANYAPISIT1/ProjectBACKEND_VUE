@@ -11,66 +11,74 @@
       </div>
 
       <!-- Form Grid -->
-      <div>
+      <form @submit.prevent="updateCon">
         <div v-for="contract in contract" :key="contract.ConID" class="grid grid-cols-2 gap-4">
+
+          <!-- <div>
+            <label for="ConID" class="block text-sm font-medium text-gray-700">ConID : </label>
+            <input v-model="contract.ConID" id="ConID" class="py-2 px-4 border-b" disabled/>
+          </div>
+
+          <div>
+            <label for="AID" class="block text-sm font-medium text-gray-700">AID : </label>
+            <input v-model="edit.AID" id="AID" class="py-2 px-4 border-b" />
+          </div> -->
+
           <!-- loandate Field -->
           <div>
             <label for="loandate" class="block text-sm font-medium text-gray-700">วันที่กู้ยืม : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.LoanDate" id="loandate" type="date" class="py-2 px-4 border-b" />
+            <input v-model="edit.LoanDate" id="loandate" type="date" class="mt-1 p-2 border rounded-md w-full" />
           </div>
-          <!-- Other Fields ... -->
 
+          
           <div>
             <label for="ReturnDate" class="block text-sm font-medium text-gray-700">วันที่ต้องคืน : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.ReturnDate" id="ReturnDate" type="date" class="py-2 px-4 border-b" />
+            <input v-model="edit.ReturnDate" id="ReturnDate" type="date" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
           <div>
             <label for="Duration" class="block text-sm font-medium text-gray-700">ระยะเวลา : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.Duration" id="Duration" class="py-2 px-4 border-b" />
+            <input v-model="edit.Duration" id="Duration" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
           <div>
             <label for="Priciple" class="block text-sm font-medium text-gray-700">เงินต้น : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.Priciple" id="Priciple" class="py-2 px-4 border-b" />
+            <input v-model="edit.Priciple" id="Priciple" class="mt-1 p-2 border rounded-md w-full" />
           </div>
           
           <div>
             <label for="Interest" class="block text-sm font-medium text-gray-700">ดอกเบี้ย : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.Interest" id="Interest" class="py-2 px-4 border-b" />
+            <input v-model="edit.Interest" id="Interest" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
           <div>
             <label for="Penality" class="block text-sm font-medium text-gray-700">ค่าปรับ : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.Penality" id="Penality" class="py-2 px-4 border-b" />
+            <input v-model="edit.Penality" id="Penality" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
           <div>
             <label for="Status" class="block text-sm font-medium text-gray-700">สถานะ : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.Status" id="Status" class="py-2 px-4 border-b" />
+            <select id="status" v-model="edit.Status" class="mt-1 p-2 border rounded-md w-full">
+              <option value="ชำระแล้ว">ชำระแล้ว</option>
+              <option value="ค้างชำระ">ค้างชำระ</option>
+              <option value="อยู่ในสัญญา">อยู่ในสัญญา</option>
+            </select>
           </div>
 
           <div>
             <label for="ReturnMoney" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
-            <!-- Replace h2 with input -->
-            <input v-model="contract.ReturnMoney" id="ReturnMoney" class="py-2 px-4 border-b" />
+            <input v-model="edit.ReturnMoney" id="ReturnMoney" class="mt-1 p-2 border rounded-md w-full" />
           </div>
-          <!-- Goto Finance -->
+
           <div>
-            <button @click="updateData" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Update</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Update</button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
+
 
 
 <script setup>
@@ -78,38 +86,51 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router';
 
-const contract = ref({});
 const route = useRoute();
+const contract = ref({})
+
+const edit = ref({});
 
 onMounted(async () => {
   try {
     const ConID = route.params.ConID;
     const response = await axios.get(`http://localhost:8800/contract/${ConID}`);
     contract.value = response.data;
-    console.log(response);
+    edit.value = { ...response.data };
+    console.log(response.data);
   } catch (error) {
     console.error(error);
   }
 });
 
-const editcontract = async () => {
-    await axios.put(`http://localhost:8800/contract/${ConID}`, {
-      "LoanDate" :  contract.value.LoanDate,
-      "ReturnDate" : contract.value.ReturnDate,
-      "Duration" : contract.value.Duration,
-      "Priciple" : contract.value.Principle,
-      "Interest" : contract.value.Interest,
-      "Penality" : contract.value.Penality,
-      "Status" : contract.value.Status,
-      "ReturnMoney" : contract.value.ReturnMoney
+const updateCon = async () => {
+  try {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    }).then((response) =>{
-      console.log(response)
-    }).catch((err) => {
-      console.log(err)
+    var raw = ({
+      // "ConID": edit.value.ConID,
+      // "AID": edit.value.AID,
+      "LoanDate": edit.value.LoanDate,
+      "ReturnDate": edit.value.ReturnDate,
+      "Duration": edit.value.Duration,
+      "Status": edit.value.Status,
+      "Priciple": edit.value.Priciple,
+      "Interest": edit.value.Interest,
+      "Penality": edit.value.Penality,
+      "ReturnMoney": edit.value.ReturnMoney,
     });
+
+    console.log(raw);
+    const ConID = route.params.ConID;
+    await axios.post(`http://localhost:8800/contract/edit/${ConID}`,{raw});
+    console.log("Contract updated successfully");
+  } catch (error) {
+    console.error("Error updating contract", error);
+  }
+};
 </script>
 
 <style>
-/* Your component-specific styles go here */
+
 </style>

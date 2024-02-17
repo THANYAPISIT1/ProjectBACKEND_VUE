@@ -13,7 +13,7 @@
         
       </label>
     </div>
-    <router-link to="/FinanceForm" class="text-blue-500 px-4 py-2 ml-auto">
+    <router-link :to="'/FinanceForm/'+ finance.ConID" class="text-blue-500 px-4 py-2 ml-auto">
       <button class="bg-blue-500 text-white px-4 py-2 rounded-md ">Add Data</button>
     </router-link>
   </div>
@@ -49,8 +49,6 @@ import { useRoute } from 'vue-router'
 const finance = ref({});
 const route = useRoute();
 
-
-
 onMounted(async () => {
   try {
     const ConID = route.params.ConID;
@@ -60,6 +58,7 @@ onMounted(async () => {
   } catch (error) {
     console.error(error);
   }
+
 });
 
 </script>

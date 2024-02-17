@@ -61,14 +61,15 @@
         </div>
         <!-- Goto Finance -->
         <div>
-          <router-link :to="'/finance/' + contract.ConID">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Finacne</button>
-          </router-link>
+          <button @click="showTable" type="showItem" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Show Finance Table</button>
+            <router-link :to="'/AddFinance/' + contract.ConID" class=" my-8">
+              <button type="addform" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add Finance Data</button>
+            </router-link>
+          </div>
         </div>
       </div>
-    </div>
     <!--  -->
-    <div class="mt-4 p-4">
+    <div v-if="isTableVisible"  class="mt-4 p-4">
       <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-md overflow-hidden">
         <thead>
           <tr>
@@ -101,6 +102,12 @@ const finance = ref({});
 const contract = ref({});
 const route = useRoute();
 
+const isTableVisible = ref(false);
+
+const showTable = () => {
+  isTableVisible.value = !isTableVisible.value; // Toggle the visibility
+};
+
 onMounted(async () => {
   try {
     const ConID = route.params.ConID;
@@ -111,7 +118,7 @@ onMounted(async () => {
     console.error(error);
   }
 
-
+// Finance Api called
   try {
     const ConID = route.params.ConID;
     const response = await axios.get(`http://localhost:8800/finance/${ConID}`);

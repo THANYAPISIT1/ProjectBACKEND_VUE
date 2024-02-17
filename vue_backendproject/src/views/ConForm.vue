@@ -29,8 +29,12 @@
         
         <!-- status Field -->
         <div>
-          <label for="status" class="block text-sm font-medium text-gray-700">สถานะ</label>
-          <input id="status" type="text" v-model="add.Status" class="mt-1 p-2 border rounded-md w-full">
+            <label for="status" class="block text-sm font-medium text-gray-700">สถานะ</label>
+            <select id="status" v-model="add.Status" class="mt-1 p-2 border rounded-md w-full">
+              <option value="ชำระแล้ว">ชำระแล้ว</option>
+              <option value="ค้างชำระ">ค้างชำระ</option>
+              <option value="อยู่ในสัญญา">อยู่ในสัญญา</option>
+            </select>
         </div>
         
 

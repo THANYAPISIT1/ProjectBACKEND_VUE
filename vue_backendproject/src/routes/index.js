@@ -21,12 +21,12 @@ const routes = [
     { path: '/CusForm', component: () => import('../views/CusForm.vue')},
     { path: '/Customer', component: () => import('../views/Customer.vue')},
     { path: '/ConDetail/:ConID', component: () => import('../views/ConDetail.vue')},
-    { path: '/ConDetail_edit/:ConID', component: () => import('../views/ConDetail_edit.vue')},
+    { path: '/ConDetail/edit/:ConID', component: () => import('../views/ConDetail_edit.vue')},
     { path: '/ConForm', component: () => import('../views/ConForm.vue')},
     { path: '/CusDetail/:CusID', component: () => import('../views/CusDetail.vue')},
-    { path: '/CusDetail_edit/:CusID', component: () => import('../views/CusDetail_edit.vue')},
-    { path: '/Finance/:ConID', component: () => import('../views/Finance.vue')},
-    { path: '/FinanceForm/', component: () => import('../views/FinanceForm.vue')},
+    { path: '/CusDetail/edit/:CusID', component: () => import('../views/CusDetail_edit.vue')},
+    { path: '/AddFinance/:ConID', component: () => import('../views/AddFinance.vue')},
+
 ];
 
 const router = createRouter({

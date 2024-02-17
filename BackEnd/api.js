@@ -58,30 +58,42 @@ app.post("/contract" , (req,res)=>{
 
 
 //Update contract in Contract page//
-app.put("/contract/:ConID",(req,res) =>{
+// app.put("/contract/edit/:ConID",(req,res) =>{
+//     const ConID = req.params.ConID;
+//     console.log(ConID)
+//     const q = "UPDATE contract SET `LoanDate` = ?,`ReturnDate` = ?,`Duration` = ?,`Status` = ?,`Priciple` = ?,`Interest` = ?,`Penality` = ?,`ReturnMoney` = ? ,`CusID` = ?,`AID` = ? WHERE ConID = ?";
+//     const values=[
+//         req.body.LoanDate,
+//         req.body.ReturnDate,
+//         req.body.Duration,
+//         req.body.Status,
+//         req.body.Priciple,
+//         req.body.Interest,
+//         req.body.Penality,
+//         req.body.ReturnMoney,
+//         req.body.CusID,
+//         req.body.AID
+//     ]
+
+//     db.query(q , [...values,ConID] , (err,data)=>{
+//         if(err) return res.json(err)
+//         return res.json("Contract has been updated successfully!");
+//     })
+// })
+app.post("/contract/edit/:ConID",(req,res) =>{
     const ConID = req.params.ConID;
-    const q = "UPDATE contract SET `LoanDate` = ?,`ReturnDate` = ?,`Duration` = ?,`Status` = ?,`Priciple` = ?,`Interest` = ?,`Penality` = ?,`ReturnMoney` = ?,`CusID` = ?,`AID` = ? WHERE ConID = ?";
-
-    const values=[
-        req.body.LoanDate,
-        req.body.ReturnDate,
-        req.body.Duration,
-        req.body.Status,
-        req.body.Priciple,
-        req.body.Interest,
-        req.body.Penality,
-        req.body.ReturnMoney,
-        req.body.CusID,
-        req.body.AID
-    ]
-
+    console.log(ConID)
+    const q = "UPDATE contract SET `LoanDate` = ?,`ReturnDate` = ?,`Duration` = ?,`Status` = ?,`Priciple` = ?,`Interest` = ?,`Penality` = ?,`ReturnMoney` = ? WHERE ConID = ?";
+    const {raw} = req.body
+ 
+    console.log(raw)
+    const values = Object.values(raw)
 
     db.query(q , [...values,ConID] , (err,data)=>{
         if(err) return res.json(err)
         return res.json("Contract has been updated successfully!");
     })
 })
-
 //-------------------------------------------------------------------------------//
 //Show customers in Customer page//
 app.get("/customers", (req,res)=>{
@@ -124,7 +136,7 @@ app.post("/customers" , (req,res)=>{
 })
 
 //Update customers in Customers page//
-app.put("/customers/:CusID",(req,res) =>{
+app.put("/customers/edit/:CusID",(req,res) =>{
     const CusID = req.params.CusID;
     const q = "UPDATE customers SET `CusName` = ?,`SSN` = ?,`Address` = ?,`CusPhoneNo` = ?,`Facebook` = ?,`Income` = ?,`Asset` = ? WHERE CusID = ?";
 
