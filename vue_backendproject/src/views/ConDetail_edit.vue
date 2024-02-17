@@ -5,57 +5,51 @@
 
     <!-- Form Section -->
     <div class="p-4">
-      <div class="my-4" v-for="contract in contract" :key="contract.ConID">
+      <div class="my-4" v-for="contractItem in contract" :key="contractItem.ConID">
         <h1 class="text-2xl font-bold mb-4"> Contract Detail </h1>
-        <p class="mt-2 text-gray-600">ContractID : {{ contract.ConID }}</p>
+        <p class="mt-2 text-gray-600">ContractID : {{ contractItem.ConID }}</p>
       </div>
 
       <!-- Form Grid -->
       <form @submit.prevent="updateCon">
-        <div v-for="contract in contract" :key="contract.ConID" class="grid grid-cols-2 gap-4">
-
-          <!-- <div>
-            <label for="ConID" class="block text-sm font-medium text-gray-700">ConID : </label>
-            <input v-model="contract.ConID" id="ConID" class="py-2 px-4 border-b" disabled/>
-          </div>
-
-          <div>
-            <label for="AID" class="block text-sm font-medium text-gray-700">AID : </label>
-            <input v-model="edit.AID" id="AID" class="py-2 px-4 border-b" />
-          </div> -->
-
+        <div v-for="contractItem in contract" :key="contractItem.ConID" class="grid grid-cols-2 gap-4">
           <!-- loandate Field -->
           <div>
             <label for="loandate" class="block text-sm font-medium text-gray-700">วันที่กู้ยืม : </label>
             <input v-model="edit.LoanDate" id="loandate" type="date" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
-          
+          <!-- ReturnDate Field -->
           <div>
             <label for="ReturnDate" class="block text-sm font-medium text-gray-700">วันที่ต้องคืน : </label>
             <input v-model="edit.ReturnDate" id="ReturnDate" type="date" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
+          <!-- Duration Field -->
           <div>
             <label for="Duration" class="block text-sm font-medium text-gray-700">ระยะเวลา : </label>
             <input v-model="edit.Duration" id="Duration" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
+          <!-- Priciple Field -->
           <div>
             <label for="Priciple" class="block text-sm font-medium text-gray-700">เงินต้น : </label>
             <input v-model="edit.Priciple" id="Priciple" class="mt-1 p-2 border rounded-md w-full" />
           </div>
           
+          <!-- Interest Field -->
           <div>
             <label for="Interest" class="block text-sm font-medium text-gray-700">ดอกเบี้ย : </label>
             <input v-model="edit.Interest" id="Interest" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
+          <!-- Penality Field -->
           <div>
             <label for="Penality" class="block text-sm font-medium text-gray-700">ค่าปรับ : </label>
-            <input placeholder="" v-model="edit.Penality" id="Penality" class="mt-1 p-2 border rounded-md w-full" />
+            <input v-model="edit.Penality" id="Penality" class="mt-1 p-2 border rounded-md w-full" />
           </div>
 
+          <!-- Status Field -->
           <div>
             <label for="Status" class="block text-sm font-medium text-gray-700">สถานะ : </label>
             <select id="status" v-model="edit.Status" class="mt-1 p-2 border rounded-md w-full">
@@ -65,6 +59,7 @@
             </select>
           </div>
 
+          <!-- ReturnMoney Field -->
           <div>
             <label for="ReturnMoney" class="block text-sm font-medium text-gray-700">จำนวนเงินที่คืนมาแล้ว : </label>
             <input v-model="edit.ReturnMoney" id="ReturnMoney" class="mt-1 p-2 border rounded-md w-full" />
@@ -78,7 +73,6 @@
     </div>
   </div>
 </template>
-
 
 
 <script setup>
