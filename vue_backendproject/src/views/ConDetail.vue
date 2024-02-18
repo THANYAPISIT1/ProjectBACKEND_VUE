@@ -72,7 +72,7 @@
             <!-- Total Amount Box -->
         </div>
         <div class="bg-gray-100 p-4 rounded-md text-center">
-          <h2 class="text-sm font-medium text-sky-900">Profit : {{ totalAmount }} </h2>
+          <p class="text-sm font-medium text-sky-900">Profit : {{ totalAmount }} </p>
         </div>
         </div>
     </div>

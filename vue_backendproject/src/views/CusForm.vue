@@ -11,10 +11,10 @@
       <form @submit.prevent="submitForm">
         <div class="grid grid-cols-2 gap-4">
           <!-- CusID Field -->
-          <div>
+          <!-- <div>
             <label for="CusID" class="block text-sm font-medium text-gray-700">CUstomerID</label>
             <input id="CusID" type="text" v-model="add.CusID" class="mt-1 p-2 border rounded-md w-full">
-          </div>
+          </div> -->
 
           <!-- CusName Field -->
           <div>
@@ -56,6 +56,9 @@
             <label for="Asset" class="block text-sm font-medium text-gray-700">Asset</label>
             <input id="Asset" type="text" v-model="add.Asset" class="mt-1 p-2 border rounded-md w-full">
           </div>
+          <div>
+
+          </div>
 
           <button @click="showAlert" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 w-1/4">Submit</button>
         </div>
@@ -74,7 +77,7 @@ const showAlert = () => {
 };
 
 const add = ref({
-  CusID: '',
+  // CusID: '',
   CusName: '',
   SSN: '',
   Address: '',
@@ -87,7 +90,7 @@ const add = ref({
 const submitForm = async() =>{
   try {
     const response = await axios.post('http://localhost:8800/customers', {
-      "CusID": add.value.CusID,
+      // "CusID": add.value.CusID,
       "CusName": add.value.CusName,
       "SSN": add.value.SSN,
       "Address": add.value.Address,
