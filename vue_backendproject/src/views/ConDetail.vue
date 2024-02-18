@@ -71,8 +71,8 @@
             </div>
             <!-- Total Amount Box -->
         </div>
-        <div class="bg-gray-100 p-4 rounded-md">
-          <p class="text-sm font-medium text-gray-700">Total Amount: {{ totalAmount }} </p>
+        <div class="bg-gray-100 p-4 rounded-md text-center">
+          <h2 class="text-sm font-medium text-sky-900">Profit : {{ totalAmount }} </h2>
         </div>
         </div>
     </div>
